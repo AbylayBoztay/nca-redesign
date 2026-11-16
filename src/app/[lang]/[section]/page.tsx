@@ -5,7 +5,7 @@ import { SECTIONS } from "@/lib/i18n";
 
 export function generateStaticParams() {
   return locales.flatMap((lang) =>
-    SECTIONS.filter((s) => s.slug !== "reestr").map(({ slug }) => ({
+    SECTIONS.filter((s) => !["reestr", "kontakty"].includes(s.slug)).map(({ slug }) => ({
       lang,
       section: slug,
     })),
