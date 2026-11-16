@@ -3,16 +3,13 @@
 import Link from "next/link";
 import { useState } from "react";
 import { Search } from "lucide-react";
-import { searchRegistry, type RegistryEntry } from "@/data/registry";
+import { searchRegistry } from "@/data/registry";
+import { formatDate } from "@/lib/format";
+import StatusBadge from "@/components/StatusBadge";
 import type { Dictionary } from "@/app/[lang]/dictionaries";
 
 const EXAMPLES = ["KZ.T.02.0347", "ISO 15189", "Алматы"];
-
-const STATUS_STYLE: Record<RegistryEntry["status"], string> = {
-  active: "bg-ok-soft text-ok",
-  suspended: "bg-warn-soft text-warn",
-  expired: "bg-bad-soft text-bad",
-};
+const MAX_RESULTS = 5;
 
 type Props = { lang: string; t: Dictionary["hero"] };
 
@@ -25,13 +22,6 @@ export default function RegistrySearch({ lang, t }: Props) {
     setQuery(q);
     setSubmitted(q);
   };
-
-  const date = (iso: string) =>
-    new Date(iso).toLocaleDateString(lang === "kk" ? "kk-KZ" : lang, {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    });
 
   return (
     <div>
@@ -95,35 +85,33 @@ export default function RegistrySearch({ lang, t }: Props) {
               {t.found}: {results.length}
             </p>
             <ul className="divide-y divide-line overflow-hidden rounded-lg border border-line bg-white">
-              {results.map((r) => (
-                <li
-                  key={r.certificate}
-                  className="grid gap-x-6 gap-y-2 p-5 sm:grid-cols-[11rem_1fr_auto] sm:items-center"
-                >
-                  <div>
-                    <p className="text-xs text-steel">{t.certificate}</p>
-                    <p className="tabular text-lg font-semibold tracking-tight">
-                      {r.certificate}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="font-medium">{r.name}</p>
-                    <p className="mt-1 text-sm text-steel">
-                      {r.kind}, {r.standard}, {r.city}
-                    </p>
-                  </div>
-                  <div className="sm:text-right">
-                    <span
-                      className={`inline-block rounded px-2 py-1 text-xs font-semibold ${STATUS_STYLE[r.status]}`}
-                    >
-                      {t.status[r.status]}
-                    </span>
-                    <p className="tabular mt-1 text-xs text-steel">
-                      {r.status === "expired"
-                        ? date(r.validUntil)
-                        : `${t.validUntil} ${date(r.validUntil)}`}
-                    </p>
-                  </div>
+              {results.slice(0, MAX_RESULTS).map((r) => (
+                <li key={r.id}>
+                  <Link
+                    href={`/${lang}/reestr/${r.id}`}
+                    className="grid gap-x-6 gap-y-2 p-5 hover:bg-paper sm:grid-cols-[11rem_1fr_auto] sm:items-center"
+                  >
+                    <div>
+                      <p className="text-xs text-steel">{t.certificate}</p>
+                      <p className="tabular text-lg font-semibold tracking-tight">
+                        {r.certificate}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="font-medium">{r.name}</p>
+                      <p className="mt-1 text-sm text-steel">
+                        {r.kind}, {r.standard}, {r.city}
+                      </p>
+                    </div>
+                    <div className="sm:text-right">
+                      <StatusBadge status={r.status} label={t.status[r.status]} />
+                      <p className="tabular mt-1 text-xs text-steel">
+                        {r.status === "expired"
+                          ? formatDate(r.validUntil, lang)
+                          : `${t.validUntil} ${formatDate(r.validUntil, lang)}`}
+                      </p>
+                    </div>
+                  </Link>
                 </li>
               ))}
             </ul>

@@ -44,11 +44,26 @@
     "title": "How accreditation works",
     "lead": "Five stages from application to certificate. Applications are filed online through the Technical Regulation information system.",
     "items": [
-      { "title": "Preparation", "text": "Bring your management system in line with ISO/IEC 17025, 17065 or the standard for your activity." },
-      { "title": "Application", "text": "Submit the application and documents on techreg.gov.kz, signed with the director’s digital signature." },
-      { "title": "Document review", "text": "An assessor reviews the documents and scope. Findings arrive in your personal account." },
-      { "title": "On-site assessment", "text": "An assessment team checks staff, equipment, methods and records on site." },
-      { "title": "Decision and certificate", "text": "The commission decides, NCA issues an order and a certificate, and the organization enters the registry." }
+      {
+        "title": "Preparation",
+        "text": "Bring your management system in line with ISO/IEC 17025, 17065 or the standard for your activity."
+      },
+      {
+        "title": "Application",
+        "text": "Submit the application and documents on techreg.gov.kz, signed with the director’s digital signature."
+      },
+      {
+        "title": "Document review",
+        "text": "An assessor reviews the documents and scope. Findings arrive in your personal account."
+      },
+      {
+        "title": "On-site assessment",
+        "text": "An assessment team checks staff, equipment, methods and records on site."
+      },
+      {
+        "title": "Decision and certificate",
+        "text": "The commission decides, NCA issues an order and a certificate, and the organization enters the registry."
+      }
     ],
     "cost": "Fees",
     "start": "Apply"
@@ -56,12 +71,30 @@
   "tasks": {
     "title": "Common tasks",
     "items": [
-      { "title": "Regulatory documents", "text": "Laws, orders, procedures and standard forms" },
-      { "title": "Accreditation fees", "text": "Rates in MCI per person-day" },
-      { "title": "Assessor training", "text": "Seminar calendar and registration" },
-      { "title": "File a complaint or appeal", "text": "Procedure and deadlines" },
-      { "title": "Suspended bodies", "text": "List and grounds" },
-      { "title": "FAQ", "text": "Answers to common applicant questions" }
+      {
+        "title": "Regulatory documents",
+        "text": "Laws, orders, procedures and standard forms"
+      },
+      {
+        "title": "Accreditation fees",
+        "text": "Rates in MCI per person-day"
+      },
+      {
+        "title": "Assessor training",
+        "text": "Seminar calendar and registration"
+      },
+      {
+        "title": "File a complaint or appeal",
+        "text": "Procedure and deadlines"
+      },
+      {
+        "title": "Suspended bodies",
+        "text": "List and grounds"
+      },
+      {
+        "title": "FAQ",
+        "text": "Answers to common applicant questions"
+      }
     ]
   },
   "news": {
@@ -78,5 +111,37 @@
     "title": "Section in progress",
     "text": "This page will be built in a later stage of the concept.",
     "back": "Back to home"
+  },
+  "registry": {
+    "title": "Registry of accredited bodies",
+    "lead": "Laboratories, conformity assessment bodies and inspection bodies accredited by NCA.",
+    "search": "Name, certificate or BIN",
+    "kind": "Activity",
+    "standard": "Standard",
+    "city": "City",
+    "status": "Status",
+    "all": "All",
+    "reset": "Reset filters",
+    "shown": "Showing",
+    "of": "of",
+    "empty": "No matches for these filters. Try removing one.",
+    "cols": {
+      "certificate": "Certificate",
+      "name": "Organization",
+      "city": "City",
+      "validUntil": "Valid until",
+      "status": "Status"
+    },
+    "detail": {
+      "back": "Back to registry",
+      "bin": "BIN",
+      "issued": "Issued",
+      "validUntil": "Valid until",
+      "scope": "Scope of accreditation",
+      "address": "Address",
+      "kind": "Activity",
+      "standard": "Standard",
+      "demo": "Demo record. The organization is fictional."
+    }
   }
 }

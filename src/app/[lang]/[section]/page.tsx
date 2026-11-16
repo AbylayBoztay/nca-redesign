@@ -5,7 +5,10 @@ import { SECTIONS } from "@/lib/i18n";
 
 export function generateStaticParams() {
   return locales.flatMap((lang) =>
-    SECTIONS.map(({ slug }) => ({ lang, section: slug })),
+    SECTIONS.filter((s) => s.slug !== "reestr").map(({ slug }) => ({
+      lang,
+      section: slug,
+    })),
   );
 }
 
