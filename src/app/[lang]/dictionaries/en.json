@@ -1,0 +1,82 @@
+{
+  "meta": {
+    "title": "National Center for Accreditation — redesign concept",
+    "description": "An unofficial concept for the new NCA website: registry, accreditation process, documents and training."
+  },
+  "concept": "Unofficial redesign concept. Registry data is for demonstration only.",
+  "org": {
+    "short": "NCA",
+    "full": "National Center for Accreditation",
+    "parent": "Committee for Technical Regulation and Metrology, Ministry of Trade and Integration of Kazakhstan"
+  },
+  "nav": {
+    "accreditation": "Accreditation",
+    "registry": "Registry",
+    "documents": "Documents",
+    "training": "Training",
+    "about": "About",
+    "news": "News",
+    "contacts": "Contacts"
+  },
+  "header": {
+    "callCenter": "Call center",
+    "menu": "Menu",
+    "close": "Close"
+  },
+  "hero": {
+    "title": "Check whether a laboratory or certification body is accredited",
+    "lead": "Enter the organization name, certificate number or BIN. The registry updates after every NCA order.",
+    "placeholder": "For example, KZ.T.02.0347 or “Testing laboratory”",
+    "search": "Search",
+    "examples": "Try:",
+    "found": "Found",
+    "nothing": "No matches. Check the certificate number: it looks like KZ.T.02.0347.",
+    "certificate": "Certificate",
+    "validUntil": "valid until",
+    "status": {
+      "active": "Active",
+      "suspended": "Suspended",
+      "expired": "Expired"
+    },
+    "allResults": "Open the full registry"
+  },
+  "steps": {
+    "title": "How accreditation works",
+    "lead": "Five stages from application to certificate. Applications are filed online through the Technical Regulation information system.",
+    "items": [
+      { "title": "Preparation", "text": "Bring your management system in line with ISO/IEC 17025, 17065 or the standard for your activity." },
+      { "title": "Application", "text": "Submit the application and documents on techreg.gov.kz, signed with the director’s digital signature." },
+      { "title": "Document review", "text": "An assessor reviews the documents and scope. Findings arrive in your personal account." },
+      { "title": "On-site assessment", "text": "An assessment team checks staff, equipment, methods and records on site." },
+      { "title": "Decision and certificate", "text": "The commission decides, NCA issues an order and a certificate, and the organization enters the registry." }
+    ],
+    "cost": "Fees",
+    "start": "Apply"
+  },
+  "tasks": {
+    "title": "Common tasks",
+    "items": [
+      { "title": "Regulatory documents", "text": "Laws, orders, procedures and standard forms" },
+      { "title": "Accreditation fees", "text": "Rates in MCI per person-day" },
+      { "title": "Assessor training", "text": "Seminar calendar and registration" },
+      { "title": "File a complaint or appeal", "text": "Procedure and deadlines" },
+      { "title": "Suspended bodies", "text": "List and grounds" },
+      { "title": "FAQ", "text": "Answers to common applicant questions" }
+    ]
+  },
+  "news": {
+    "title": "News",
+    "all": "All news"
+  },
+  "footer": {
+    "address": "Astana, Etalon Center building, 6th floor",
+    "email": "info@nca.kz",
+    "trust": "Hotline",
+    "rights": "This concept was made for learning purposes and is not the official NCA website."
+  },
+  "stub": {
+    "title": "Section in progress",
+    "text": "This page will be built in a later stage of the concept.",
+    "back": "Back to home"
+  }
+}

@@ -1,0 +1,19 @@
+import "server-only";
+import ru from "./dictionaries/ru.json";
+
+const dictionaries = {
+  ru: () => import("./dictionaries/ru.json").then((m) => m.default),
+  kk: () => import("./dictionaries/kk.json").then((m) => m.default),
+  en: () => import("./dictionaries/en.json").then((m) => m.default),
+};
+
+export type Locale = keyof typeof dictionaries;
+export type Dictionary = typeof ru;
+
+export const locales = Object.keys(dictionaries) as Locale[];
+
+export const hasLocale = (locale: string): locale is Locale =>
+  locale in dictionaries;
+
+export const getDictionary = async (locale: Locale): Promise<Dictionary> =>
+  dictionaries[locale]();
