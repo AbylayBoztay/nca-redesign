@@ -167,5 +167,135 @@
     "empty": "No one found. Check the spelling or choose another department.",
     "noPhone": "No phone listed",
     "source": "Directory copied from nca.kz/contacts as of November 2026. Names and positions are in Russian, as on the original site."
+  },
+  "training": {
+    "title": "Training for specialists",
+    "lead": "Courses on accreditation standards for staff of laboratories, certification and inspection bodies. Taught by NCA assessors.",
+    "facts": {
+      "duration": "3 working days",
+      "durationNote": "per course",
+      "online": "Online",
+      "offline": "In person",
+      "perPerson": "per participant, VAT incl.",
+      "cities": "Astana and Almaty"
+    },
+    "upcoming": "Upcoming sessions",
+    "noUpcoming": "No upcoming sessions. Send a request and the course will be run for your group.",
+    "apply": "Apply",
+    "programs": "All programs",
+    "onRequest": "On request",
+    "onRequestNote": "Dates agreed with your group",
+    "sessions": "sessions",
+    "how": "How to enroll",
+    "steps": [
+      {
+        "title": "Apply online",
+        "text": "Choose a course and session, add your organization and participants. Takes about 5 minutes."
+      },
+      {
+        "title": "Contract and invoice",
+        "text": "The training department reviews the application and emails the contract and invoice."
+      },
+      {
+        "title": "Payment",
+        "text": "Seats are confirmed once payment arrives."
+      },
+      {
+        "title": "Training",
+        "text": "Before the start you get a link to join online or the classroom address."
+      }
+    ],
+    "contacts": "Training questions",
+    "priceNote": "Prices may change depending on the number of participants and programs (by agreement)."
+  },
+  "apply": {
+    "title": "Training application",
+    "lead": "This form replaces the paper “Application for paid training”.",
+    "demo": "Demo version: the application is not sent anywhere.",
+    "steps": [
+      "Course",
+      "Organization",
+      "Participants",
+      "Bank details",
+      "Review"
+    ],
+    "next": "Next",
+    "back": "Back",
+    "submit": "Submit application",
+    "step": "Step",
+    "of": "of",
+    "course": {
+      "program": "Training program",
+      "session": "Session",
+      "onRequest": "No suitable date — run on request",
+      "format": "Format",
+      "online": "Online",
+      "offline": "In person",
+      "city": "City",
+      "astana": "Astana",
+      "almaty": "Almaty"
+    },
+    "org": {
+      "name": "Full legal name of the organization",
+      "bin": "BIN",
+      "binHint": "12 digits",
+      "legalAddress": "Legal address",
+      "postcode": "Postcode",
+      "actualSame": "Actual address is the same as legal",
+      "actualAddress": "Actual address",
+      "procurement": "The contract goes through public procurement",
+      "yes": "Yes",
+      "no": "No"
+    },
+    "people": {
+      "title": "Participants",
+      "name": "Full name",
+      "position": "Position",
+      "email": "Participant email",
+      "emailHint": "optional",
+      "add": "Add participant",
+      "remove": "Remove",
+      "person": "Participant",
+      "idNote": "Copies of ID cards are needed when signing the contract. Don’t upload them here."
+    },
+    "bank": {
+      "title": "Bank details",
+      "iik": "IBAN (IIK)",
+      "iikHint": "KZ and 18 characters",
+      "bank": "Bank name",
+      "bik": "BIC",
+      "bikHint": "8 characters",
+      "head": "Head of organization, full name",
+      "contact": "Contact person",
+      "phone": "Phone",
+      "email": "Contact email"
+    },
+    "review": {
+      "title": "Review your application",
+      "edit": "Edit",
+      "total": "Total to pay",
+      "calc": "participants ×",
+      "consent": "I consent to the collection and processing of participants’ personal data for organizing the training",
+      "consentRequired": "Consent to personal data processing is required"
+    },
+    "errors": {
+      "required": "Fill in this field",
+      "bin": "BIN is 12 digits",
+      "iik": "IIK starts with KZ, 20 characters in total",
+      "bik": "BIC is 8 Latin letters and digits",
+      "email": "Check the email",
+      "phone": "Enter a phone like +7 777 123 45 67",
+      "postcode": "Postcode is 6 digits",
+      "session": "Choose a session or the “on request” option",
+      "fix": "Fix the fields marked in red"
+    },
+    "success": {
+      "title": "Application received",
+      "number": "Application number",
+      "text": "The training department will review it and email the contract and invoice to {email}.",
+      "demoText": "This is a demo: the application was not saved and no email was sent.",
+      "again": "Submit another application",
+      "back": "Back to courses"
+    }
   }
 }
