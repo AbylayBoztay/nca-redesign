@@ -19,6 +19,24 @@ npm run dev
 
 Открыть http://localhost:3000 — произойдёт редирект на `/ru`.
 
+## База данных (Supabase)
+
+Онлайн-заявки на обучение сохраняются в Supabase (PostgreSQL). Без настроек форма работает в демо-режиме и ничего не сохраняет.
+
+1. Создать проект на supabase.com.
+2. SQL Editor → вставить и выполнить `supabase/migrations/001_training_applications.sql`.
+3. Скопировать `.env.example` в `.env.local` и заполнить URL и publishable-ключ (Project Settings → API Keys).
+4. `npm run dev`, отправить заявку, проверить таблицу `training_applications` в Table Editor.
+
+Безопасность:
+- на таблицах включён RLS без политик для `anon`: публичный ключ не может читать или писать их напрямую;
+- единственная точка входа — функция `submit_training_application` (SECURITY DEFINER);
+- сумму и номер заявки считает база, а не браузер;
+- сервер повторно проверяет данные той же схемой Zod, что и форма; есть поле-ловушка для ботов;
+- копии удостоверений личности сайт не собирает.
+
+В боевой версии персональные данные граждан РК должны храниться на серверах в Казахстане.
+
 ## Структура
 
 ```
@@ -26,9 +44,11 @@ src/
   app/[lang]/            страницы с языковым префиксом
     dictionaries/        переводы ru / kk / en
     [section]/           заглушки разделов
-  components/            Header, Footer, RegistrySearch
+  app/actions/           Server Actions (отправка заявки)
+  components/            Header, Footer, RegistrySearch, ApplicationForm …
   data/                  моковые данные реестра и новостей
-  lib/i18n.ts            языки и разделы меню
+  lib/                   языки, схема заявки (Zod)
+supabase/migrations/     SQL-схема базы
   proxy.ts               редирект / → /ru
 ```
 

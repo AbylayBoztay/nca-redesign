@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRef, useState, type ReactNode } from "react";
+import { useRef, useState, useTransition, type ReactNode } from "react";
 import { Check, CircleAlert, Plus, Trash2 } from "lucide-react";
 import {
   emptyApplication,
@@ -21,17 +21,13 @@ import {
   sessionsFor,
 } from "@/data/training";
 import type { Dictionary } from "@/app/[lang]/dictionaries";
+import { submitTrainingApplication } from "@/app/actions/training";
 
 type T = Dictionary["apply"];
 type Props = { lang: string; t: T; initialProgram?: string; initialSession?: string };
 
 const MAX_PARTICIPANTS = 20;
 
-/** Stage 1 only: the real number will come from the database. */
-function demoNumber() {
-  const n = crypto.getRandomValues(new Uint16Array(1))[0] % 9000;
-  return `ОБ-2026-${1000 + n}`;
-}
 const REQUEST = "request";
 
 const inputBase =
@@ -128,7 +124,10 @@ export default function ApplicationForm({ lang, t, initialProgram, initialSessio
   });
   const [step, setStep] = useState(0);
   const [errors, setErrors] = useState<FieldErrors>({});
-  const [done, setDone] = useState<string | null>(null);
+  const [done, setDone] = useState<{ number: string; demo: boolean } | null>(null);
+  const [serverError, setServerError] = useState(false);
+  const [pending, startTransition] = useTransition();
+  const [website, setWebsite] = useState(""); // honeypot
   const formRef = useRef<HTMLFormElement>(null);
 
   const set = <K extends keyof ApplicationData>(key: K, value: ApplicationData[K]) => {
@@ -202,9 +201,20 @@ export default function ApplicationForm({ lang, t, initialProgram, initialSessio
         return focusFirstError(errs);
       }
     }
-    // Stage 1: no backend yet — generate a demo number.
-    setDone(demoNumber());
-    window.scrollTo({ top: 0 });
+    setServerError(false);
+    startTransition(async () => {
+      const res = await submitTrainingApplication({ ...data, website });
+      if (res.ok) {
+        setDone({ number: res.number, demo: res.demo });
+        window.scrollTo({ top: 0 });
+      } else if (res.error === "validation") {
+        setStep(res.step);
+        setErrors(res.fields);
+        focusFirstError(res.fields);
+      } else {
+        setServerError(true);
+      }
+    });
   };
 
   const program = getProgram(data.programId);
@@ -222,9 +232,9 @@ export default function ApplicationForm({ lang, t, initialProgram, initialSessio
         </span>
         <h2 className="mt-4 text-2xl font-semibold tracking-tight">{t.success.title}</h2>
         <p className="mt-4 text-sm text-steel">{t.success.number}</p>
-        <p className="tabular text-3xl font-semibold tracking-tight">{done}</p>
+        <p className="tabular text-3xl font-semibold tracking-tight">{done.number}</p>
         <p className="mt-4 max-w-prose">{t.success.text.replace("{email}", data.email)}</p>
-        <p className="mt-2 text-sm text-warn">{t.success.demoText}</p>
+        <p className="mt-2 text-sm text-warn">{done.demo ? t.success.demoText : t.success.savedText}</p>
         <div className="mt-8 flex flex-wrap gap-3">
           <Link
             href={`/${lang}/obuchenie`}
@@ -238,6 +248,7 @@ export default function ApplicationForm({ lang, t, initialProgram, initialSessio
               setData(emptyApplication());
               setStep(0);
               setDone(null);
+              setServerError(false);
             }}
             className="inline-flex min-h-11 items-center rounded-lg border border-line bg-white px-5 text-sm font-medium hover:border-ink"
           >
@@ -287,6 +298,13 @@ export default function ApplicationForm({ lang, t, initialProgram, initialSessio
           ))}
         </ol>
       </nav>
+
+      {serverError && (
+        <p className="mt-6 flex items-center gap-2 rounded-lg bg-bad-soft px-4 py-3 text-sm text-bad" role="alert">
+          <CircleAlert className="size-4 shrink-0" aria-hidden />
+          {t.errors.server}
+        </p>
+      )}
 
       {hasErrors && (
         <p className="mt-6 flex items-center gap-2 rounded-lg bg-bad-soft px-4 py-3 text-sm text-bad" role="alert">
@@ -607,6 +625,12 @@ export default function ApplicationForm({ lang, t, initialProgram, initialSessio
         )}
       </div>
 
+      {/* Honeypot: hidden from people and screen readers, bots fill it in. */}
+      <div aria-hidden className="absolute -left-[9999px] h-px w-px overflow-hidden">
+        <label htmlFor="website">Website</label>
+        <input id="website" name="website" tabIndex={-1} autoComplete="off" value={website} onChange={(e) => setWebsite(e.target.value)} />
+      </div>
+
       {/* Navigation */}
       <div className="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:justify-between">
         {step > 0 ? (
@@ -622,9 +646,11 @@ export default function ApplicationForm({ lang, t, initialProgram, initialSessio
         )}
         <button
           type="submit"
-          className="inline-flex min-h-12 items-center justify-center rounded-lg bg-ink px-8 font-semibold text-white hover:bg-ink/90"
+          disabled={pending}
+          aria-busy={pending}
+          className="inline-flex min-h-12 items-center justify-center rounded-lg bg-ink px-8 font-semibold text-white hover:bg-ink/90 disabled:cursor-wait disabled:opacity-70"
         >
-          {step === stepSchemas.length - 1 ? t.submit : t.next}
+          {pending ? t.sending : step === stepSchemas.length - 1 ? t.submit : t.next}
         </button>
       </div>
     </form>

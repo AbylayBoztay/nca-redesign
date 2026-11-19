@@ -211,7 +211,7 @@
   "apply": {
     "title": "Training application",
     "lead": "This form replaces the paper “Application for paid training”.",
-    "demo": "Demo version: the application is not sent anywhere.",
+    "demo": "Concept: applications are saved to a test database and do not reach NCA.",
     "steps": [
       "Course",
       "Organization",
@@ -287,15 +287,18 @@
       "phone": "Enter a phone like +7 777 123 45 67",
       "postcode": "Postcode is 6 digits",
       "session": "Choose a session or the “on request” option",
-      "fix": "Fix the fields marked in red"
+      "fix": "Fix the fields marked in red",
+      "server": "The application could not be sent. Try again in a minute or call the training department: 8 (7172) 98-37-52."
     },
     "success": {
       "title": "Application received",
       "number": "Application number",
       "text": "The training department will review it and email the contract and invoice to {email}.",
-      "demoText": "This is a demo: the application was not saved and no email was sent.",
+      "demoText": "No database connected: the application was not saved and no email was sent.",
       "again": "Submit another application",
-      "back": "Back to courses"
-    }
+      "back": "Back to courses",
+      "savedText": "The application was saved to the concept’s test database. Emails are not sent yet."
+    },
+    "sending": "Sending…"
   }
 }
